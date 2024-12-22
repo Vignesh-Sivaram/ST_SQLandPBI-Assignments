@@ -1,0 +1,61 @@
+SQL Assignment #1
+
+1) select count(*) from emp;
+
+2) select count(*) from dept;
+
+3) select ename from emp;
+
+4) select dname from dept;
+
+5) select sum(sal) as Total_salary from emp;
+
+6) select sum(comm) as Total_commission from emp;
+
+7) select distinct job from emp where comm is not null;
+
+8) select distinct to_char(sysdate,'dd-mm-yyyy') from emp;
+
+9) select round(avg(sal),2) as Average_salary from emp;
+
+10) select deptno,count(empno) as No_of_emp from emp group by deptno order by 1;
+
+11) select deptno,sum(sal) as Total_salary from emp group by deptno order by 1;
+
+12) select job,count(empno) as No_of_emp from emp group by job;
+
+13) select job,round(avg(sal),2) as Average_salary from emp group by job;
+
+14) select ename,to_char(hiredate,'DAY') as Hire_day, to_char(hiredate,'dd') as Hire_date, to_char(hiredate,'MONTH') as Hire_month, to_char(hiredate,'YYYY') as Hire_year from emp;
+
+15) select deptno,empno,ename from emp order by deptno;
+
+16) select job,empno,ename from emp order by job;
+
+17) select ename,sal from emp order by sal desc;
+
+18) select deptno,sal,ename from emp order by deptno, sal desc;
+
+19) select count(ename) from emp where ename like '______';
+
+20) select max(sal), min(sal) from emp;
+
+21) select deptno, max(sal),min(sal),round(avg(sal),2) as Average, sum(sal) from emp group by deptno order by 1;
+
+22) select * from emp order by to_char(hiredate,'yyyy-mm-dd');
+
+23) select * from emp where to_char(hiredate,'yyyy-mm-dd')=(select max(to_char(hiredate,'yyyy-mm-dd')) from emp);
+
+24) select * from emp where to_char(hiredate,'yyyy-mm-dd')=(select min(to_char(hiredate,'yyyy-mm-dd')) from emp);
+
+25) select deptno,ename,hiredate from emp order by deptno asc,to_char(hiredate,'yyyy-mm-dd') desc;
+
+26) select ename from emp where sal>=(select avg(sal) from emp);
+
+27) select ename from emp where sal<=(select avg(sal) from emp);
+
+28) select * from emp where sal between 2000 and 4000;
+
+29) select ename,sal from emp where sal in (select max(sal) from emp union select min(sal) from emp);
+
+30) select count(ename) as No_of_gifts from emp where to_char(hiredate,'mm')=1;
