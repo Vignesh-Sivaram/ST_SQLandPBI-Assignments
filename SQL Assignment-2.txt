@@ -1,0 +1,199 @@
+1) select c.continent, d.countryname from continents c, countries d
+where c.contid=d.continent order by 1;
+
+
+2) select c.continent, count(d.countryname) as No_of_countries from continents c
+inner join countries d on c.contid=d.continent
+group by c.continent;
+
+
+3) select c.countryname as Country_with_no_makers from countries c
+left join car_makers d on c.countryid=d.country
+where d.maker is null;
+
+
+4) select d.maker as Makers_from_Japan from countries c
+inner join car_makers d on c.countryid=d.country
+where c.countryname='japan';
+
+
+5) select d.maker as Makers_from_France_and_USA from countries c
+inner join car_makers d on c.countryid=d.country
+where c.countryname in ('france','usa');
+
+
+6) select m.maker,c.countryname,d.continent from car_makers m
+inner join countries c on m.country=c.countryid
+inner join continents d on c.continent=d.contid
+where m.maker='volvo';
+
+
+7) select d.model from model_details d
+inner join car_makers m on d.maker=m.id
+where m.maker='ford';
+
+
+8) select count(d.model) as No_of_Models_by_Germany from model_details d
+inner join car_makers m on d.maker=m.id
+inner join countries c on m.country=c.countryid
+where c.countryname='germany';
+
+
+9) select d.model as Car_models_by_Japan, m.fullname as Maker from model_details d
+inner join car_makers m on d.maker=m.id
+inner join countries c on m.country=c.countryid
+where c.countryname='japan';
+
+
+(10) a) --Lowest MPG query:
+select n.model, d.mpg, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.mpg = (select min(mpg) from car_details);
+
+--Highest MPG query:
+select n.model, d.mpg, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.mpg = (select max(mpg) from car_details);
+
+ b) --Highest cylinders:
+select distinct n.model, d.cylinders, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.cylinders = (select max(cylinders) from car_details);
+
+--Lowest cylinders:
+select distinct n.model, d.cylinders, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.cylinders = (select min(cylinders)from car_details);
+
+ c) --Highest edispl
+select distinct n.model, d.edispl, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.edispl = (select max(edispl) from car_details);
+
+--Lowest edispl
+select distinct n.model, d.edispl, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.edispl = (select min(edispl) from car_details);
+
+ d) --Highest horsepower
+select distinct n.model, d.horsepower, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.horsepower = (select max(horsepower) from car_details);
+
+--Lowest horsepower
+select distinct n.model, d.horsepower, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.horsepower = (select min(horsepower) from car_details);
+
+ e) --Highest weight
+select distinct n.model, d.weight, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.weight = (select max(weight) from car_details);
+
+--Lowest weight
+select distinct n.model, d.weight, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.weight = (select min(weight) from car_details);
+
+ f) --Highest Accel
+select distinct n.model, d.accel, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.accel = (select max(accel) from car_details);
+
+--Lowest Accel
+select distinct n.model, d.accel, c.maker, b.countryname, a.continent from car_names n
+inner join car_details d on n.id=d.id
+left join model_details m on n.model=m.model
+left join car_makers c on m.maker=c.id
+left join countries b on c.country=b.countryid
+left join continents a on b.continent=a.contid
+where d.accel = (select min(accel) from car_details);
+
+
+11) select year,count(*) as Max_cars from car_details 
+group by year order by 2 desc
+fetch first 1 rows only;
+
+
+12) select year,count(*) as Min_cars from car_details 
+group by year order by 2
+fetch first 1 rows only;
+
+
+(13) a) select year,min(mpg), max(mpg), round(avg(mpg),2)
+ as Average_MPG from car_details group by year;
+
+  b) select year,min(cylinders), max(cylinders), round(avg(cylinders),2)
+ as Average_Cylinders from car_details group by year;
+
+  c) select year,min(edispl), max(edispl), round(avg(edispl),2)
+ as Average_edispl from car_details group by year;
+
+  d) select year,min(horsepower), max(horsepower), round(avg(horsepower),2)
+ as Average_horsepower from car_details group by year;
+
+  e) select year,min(weight), max(weight), round(avg(weight),2)
+ as Average_Weight from car_details group by year;
+
+  f) select year,min(accel), max(accel), round(avg(accel),2)
+ as Average_Accel from car_details group by year;
+
+
+14) (1) select round(avg(horsepower),2) as Mean_horsepower,
+ median(horsepower), round(stddev(horsepower),2) as Stddev_horsepower from car_details;
+
+  (2) select round(avg(weight),2) as Mean_weight, median(weight),
+ round(stddev(weight),2) as Stddev_weight from car_details;
+
+  (3) select round(avg(accel),2) as Mean_Accel, median(accel),
+ round(stddev(accel),2) as Stddev_Accel from car_details;
+
+   • The mean value and median value of horsepower: 105 and 95 has a difference of 10, 
+which is minimal variation and a standard deviation of 38.7, which is medium.
+   • The Mean weight value and Median weight values have more wide variations and the 
+standard deviation is 847, which is significant.
+   • The mean and median values for acceleration are almost same and the deviation is less.
